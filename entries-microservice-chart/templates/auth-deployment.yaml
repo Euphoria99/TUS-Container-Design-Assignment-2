@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.auth.name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.auth.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.auth.label }}
+    spec:
+      containers:
+        - name: auth-api
+          image: {{ .Values.auth.image }}
+          ports:
+            - containerPort: {{ .Values.auth.targetPort }}

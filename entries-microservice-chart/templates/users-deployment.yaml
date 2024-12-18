@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.users.name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.users.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.users.label }}
+    spec:
+      containers:
+        - name: users-api
+          image: {{ .Values.users.image }}
+          ports:
+            - containerPort: {{ .Values.users.targetPort }}
+          env:
+            - name: AUTH_ADDRESS
+              value: "{{ .Values.auth.name }}-service.default"

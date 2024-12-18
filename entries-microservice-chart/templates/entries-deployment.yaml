@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entries-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: entries
+  template:
+    metadata:
+      labels:
+        app: entries
+    spec:
+      containers:
+        - name: entries-api
+          image: pavanbhat99/tus-entries:latest
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service.default"
+            - name: ENTRIES_FOLDER
+              value: entries

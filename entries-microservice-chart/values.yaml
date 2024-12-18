@@ -1,0 +1,25 @@
+auth:
+  name: auth
+  label: auth
+  image: pavanbhat99/tus-auth:latest
+  servicePort: 81
+  targetPort: 81
+
+users:
+  name: users
+  label: users
+  image: pavanbhat99/tus-users:1
+  servicePort: 8080
+  targetPort: 8080
+
+entries:
+  name: entries
+  label: entries
+  image: pavanbhat99/tus-entries
+  servicePort: 8000
+  targetPort: 8000
+
+persistence:
+  name: entries
+  storage: 1Gi
+  path: /data/entries
